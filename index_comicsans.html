@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For My Begum 🌻</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff9c4;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1, h2 {
+      color: #ff9800;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .btn {
+      background: #ffeb3b;
+      border: none;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .btn:hover {
+      background: #ffc107;
+      transform: scale(1.1);
+    }
+    #message {
+      display: none;
+      font-size: 24px;
+      padding: 30px;
+      color: #6a1b9a;
+      animation: fadeIn 2s ease-in-out;
+      z-index: 10;
+      position: relative;
+      text-align: center;
+      line-height: 1.8em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Falling sunflowers */
+    .sunflower {
+      position: absolute;
+      top: -50px;
+      width: 40px;
+      height: 40px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_sun_symbol.png');
+      background-size: cover;
+      animation: fall linear forwards;
+      z-index: 5;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Do you love me? 💛</h1>
+  <div id="options"></div>
+  <div id="message"></div>
+
+  <script>
+    const optionsDiv = document.getElementById("options");
+    const messageDiv = document.getElementById("message");
+
+    function askLove() {
+      optionsDiv.innerHTML = `
+        <button class="btn" onclick="yesLove()">Yes 💕</button>
+        <button class="btn" onclick="noLove()">No 🙈</button>
+      `;
+    }
+
+    function noLove() {
+      document.querySelector("h1").innerText = "Do you love me? 💛 (Think again!)";
+      askLove();
+    }
+
+    function yesLove() {
+      document.querySelector("h1").innerText = "How much? 😍";
+      optionsDiv.innerHTML = `
+        <button class="btn" onclick="howMuch()">100%</button>
+        <button class="btn" onclick="howMuch()">♾️</button>
+      `;
+    }
+
+    function howMuch() {
+      document.querySelector("h1").innerText = "Are you ready? 💍";
+      optionsDiv.innerHTML = `
+        <button class="btn" onclick="finalStep()">Yes I'm Ready! 🌻</button>
+      `;
+    }
+
+    function finalStep() {
+      document.querySelector("h1").style.display = "none";
+      optionsDiv.style.display = "none";
+      messageDiv.style.display = "block";
+      messageDiv.innerHTML = `
+        ❤️ Meri zindagi ka sabse khoobsurat hissa ap hain ❤️<br><br>
+        Har dua mein jo khushi maangi woh ap ki surat mein mili.<br>
+        Din ki roshni bhi ap hain aur raat ka sukoon bhi sirf ap.<br>
+        Mohabbat nahi meri aadat ban gaye hain ap meri begum.<br>
+        Apke ilawa kisi larki ko me dekhta takh ni kyuke kehte hai,<br>
+        ku jab chand hasil hojaye tho phir sitare ni dekhne chaiye 🌻🌻
+      `;
+      startSunflowers();
+    }
+
+    function startSunflowers() {
+      for (let i = 0; i < 40; i++) {
+        let flower = document.createElement("div");
+        flower.className = "sunflower";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+          flower.remove();
+        }, 8000);
+      }
+      setInterval(startSunflowers, 4000);
+    }
+
+    askLove();
+  </script>
+</body>
+</html>
